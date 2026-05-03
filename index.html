@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetCare — Cuidamos do seu melhor amigo</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Profissionais certificados
+      </div>
+      <h1>Cuidamos do seu melhor amigo com <span>carinho</span></h1>
+      <p>Serviços completos para pets com profissionais qualificados e ambiente acolhedor.</p>
+      <div class="hero-buttons">
+        <button class="btn primary" onclick="location.href='agendamento.html'">📅 Agendar agora</button>
+        <button class="btn outline" onclick="location.href='servicos.html'">Ver serviços →</button>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-avatars">
+          <div class="proof-avatar">AM</div>
+          <div class="proof-avatar" style="background:#BBF7D0;color:#166534;">LC</div>
+          <div class="proof-avatar" style="background:#BFDBFE;color:#1D4ED8;">RF</div>
+          <div class="proof-avatar">+</div>
+        </div>
+        <div class="proof-text">
+          <div class="proof-stars">★★★★★</div>
+          <strong>+500 clientes</strong> satisfeitos · nota 4.9/5
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/hero.png" alt="Cachorros felizes">
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>Nossos Serviços</h2>
+      <p class="subtitle">Tudo que seu pet precisa, com o carinho que ele merece.</p>
+    </div>
+    <div class="grid services-grid">
+      <div class="service-card">
+        <div class="service-icon" style="background:#EFF6FF;">✂️</div>
+        <h3>Banho e Tosa</h3>
+        <p>Higiene e estética com produtos de qualidade premium para seu pet.</p>
+        <a href="servicos.html" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#F0FDF4;">🩺</div>
+        <h3>Consulta Veterinária</h3>
+        <p>Atendimento com veterinários especializados para a saúde do seu animal.</p>
+        <a href="servicos.html" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#EFF6FF;">🏠</div>
+        <h3>Hotel para Pets</h3>
+        <p>Hospedagem segura com recreação e cuidados 24 horas por dia.</p>
+        <a href="servicos.html" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#F0FDF4;">💉</div>
+        <h3>Vacinação</h3>
+        <p>Programa completo para manter seu pet protegido e saudável.</p>
+        <a href="servicos.html" class="service-link">Saiba mais →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS EM DESTAQUE -->
+<section class="products">
+  <div class="container">
+    <div class="section-header">
+      <h2>Produtos em Destaque</h2>
+      <p class="subtitle">Selecionados com critério para o bem-estar do seu pet.</p>
+    </div>
+    <div class="grid products-grid">
+      <div class="card product">
+        <img src="images/produto1.png" alt="Ração Premium" class="card-img">
+        <div class="card-body">
+          <span class="badge">Alimentação</span>
+          <h3>Ração Premium Adulto</h3>
+          <div class="price">R$ 89,90</div>
+          <button class="btn primary" style="width:100%;" onclick="addCart({id:1,nome:'Ração Premium Adulto',preco:89.90,img:'images/produto1.png'})">🛒 Comprar</button>
+        </div>
+      </div>
+      <div class="card product">
+        <img src="images/produto2.png" alt="Bola LED" class="card-img">
+        <div class="card-body">
+          <span class="badge">Brinquedos</span>
+          <h3>Bola Interativa LED</h3>
+          <div class="price">R$ 34,90</div>
+          <button class="btn primary" style="width:100%;" onclick="addCart({id:2,nome:'Bola Interativa LED',preco:34.90,img:'images/produto2.png'})">🛒 Comprar</button>
+        </div>
+      </div>
+      <div class="card product">
+        <img src="images/produto3.png" alt="Coleira" class="card-img">
+        <div class="card-body">
+          <span class="badge">Acessórios</span>
+          <h3>Coleira Ajustável Premium</h3>
+          <div class="price">R$ 45,90</div>
+          <button class="btn primary" style="width:100%;" onclick="addCart({id:3,nome:'Coleira Ajustável Premium',preco:45.90,img:'images/produto3.png'})">🛒 Comprar</button>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-32">
+      <button class="btn outline" onclick="location.href='produtos.html'">Ver todos os produtos →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="about">
+  <div class="container about-content">
+    <div class="about-text">
+      <h2>Sobre o PetCare</h2>
+      <p>Fundado em 2015, o PetCare nasceu do amor pelos animais e da vontade de oferecer um atendimento diferenciado e humano.</p>
+      <p>Contamos com uma equipe de profissionais certificados e apaixonados por pets, prontos para cuidar do seu melhor amigo como se fosse o nosso.</p>
+      <button class="btn primary mt-24" onclick="location.href='sobre.html'">Conheça nossa história</button>
+    </div>
+    <div class="about-image">
+      <img src="images/sobre.png" alt="Pessoa com cachorro">
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <h2>O que nossos clientes dizem</h2>
+    </div>
+    <div class="grid testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Excelente atendimento! Meu cachorro adora ir ao PetCare. Equipe super carinhosa."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MS</div>
+          <div class="testimonial-info"><strong>Maria Silva</strong><span>Tutora do Bolinha</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"O hotel para pets é incrível. Minha gata ficou super bem cuidada durante as férias."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#BBF7D0;color:#166534;">JP</div>
+          <div class="testimonial-info"><strong>João Pedro</strong><span>Tutor da Mimi</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>"Preços justos e qualidade impecável. Recomendo a todos os tutores de pets!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar" style="background:#BFDBFE;color:#1D4ED8;">AC</div>
+          <div class="testimonial-info"><strong>Ana Costa</strong><span>Tutora do Rex</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Entre em Contato</h2>
+        <p>Estamos aqui para responder suas dúvidas e ajudar no que precisar.</p>
+        <div class="contact-item"><span>📍</span><span>Rua dos Pets, 123 — São Paulo, SP</span></div>
+        <div class="contact-item"><span>📞</span><span>(11) 9 9999-9999</span></div>
+        <div class="contact-item"><span>✉️</span><span>contato@petcare.com.br</span></div>
+        <div class="contact-item"><span>🕐</span><span>Seg–Sex 8h–18h · Sáb 8h–14h</span></div>
+      </div>
+      <form id="contact-form">
+        <div class="form-group"><input type="text" id="contact-name" placeholder="Seu nome" required></div>
+        <div class="form-group"><input type="email" id="contact-email" placeholder="Seu e-mail" required></div>
+        <div class="form-group"><textarea id="contact-msg" placeholder="Sua mensagem" required></textarea></div>
+        <button type="submit" class="btn primary" style="width:100%;">Enviar mensagem</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="js/storage.js"></script>
+<script src="js/main.js"></script>
+<script>
+  function addCart(produto) {
+    const carrinho = Storage.getList('petcare_carrinho');
+    const exist = carrinho.find(i => i.id === produto.id);
+    if (exist) {
+      Storage.updateInList('petcare_carrinho', exist.id, { qtd: (exist.qtd || 1) + 1 });
+    } else {
+      Storage.addToList('petcare_carrinho', { ...produto, qtd: 1 });
+    }
+    updateCartBadge();
+    mostrarToast('Produto adicionado ao carrinho! 🛒', 'success');
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    Storage.addToList('petcare_contatos', {
+      nome: document.getElementById('contact-name').value,
+      email: document.getElementById('contact-email').value,
+      mensagem: document.getElementById('contact-msg').value,
+      data: new Date().toLocaleString('pt-BR')
+    });
+    mostrarToast('Mensagem enviada com sucesso!', 'success');
+    this.reset();
+  });
+</script>
+</body>
+</html>
