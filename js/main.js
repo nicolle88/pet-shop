@@ -3,6 +3,10 @@
    Injeta header e footer. Alterar somente via Pull Request.
    ============================================================ */
 
+const _pathParts = window.location.pathname.replace(/\\/g, '/').split('/');
+const _parentDir = _pathParts[_pathParts.length - 2] || '';
+const _BASE = (_parentDir === 'produtos') ? '../' : '';
+
 document.addEventListener('DOMContentLoaded', () => {
   injectHeader();
   injectFooter();
@@ -17,24 +21,24 @@ function injectHeader() {
   header.id = 'site-header';
   header.innerHTML = `
     <div class="container">
-      <a href="index.html" class="logo">
+      <a href="${_BASE}index.html" class="logo">
         <div class="logo-icon">🐾</div>
         <span>PetCare</span>
       </a>
       <nav class="main-nav">
-        <a href="index.html">Início</a>
-        <a href="produtos.html">Produtos</a>
-        <a href="servicos.html">Serviços</a>
-        <a href="sobre.html">Sobre</a>
-        <a href="contato.html">Contato</a>
+        <a href="${_BASE}index.html">Início</a>
+        <a href="${_BASE}produtos/produtos.html">Produtos</a>
+        <a href="#" "onclick="return false;">Serviços</a>
+        <a href="${_BASE}index.html#sobre">Sobre</a>
+        <a href="${_BASE}index.html#contato">Contato</a>
       </nav>
       <div class="header-actions">
-        <div class="cart-icon" onclick="location.href='carrinho.html'" title="Carrinho">
+        <div class="cart-icon" onclick="location.href='${_BASE}carrinho.html'" title="Carrinho">
           🛒
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </div>
-        <button class="btn outline sm" onclick="location.href='login.html'">Entrar</button>
-        <button class="btn green sm" onclick="location.href='agendamento.html'">📅 Agendar</button>
+        <button class="btn outline sm" onclick="location.href='${_BASE}login.html'">Entrar</button>
+        <button class="btn green sm" onclick="location.href='${_BASE}agendamento.html'">📅 Agendar</button>
       </div>
     </div>
   `;
@@ -54,21 +58,21 @@ function injectFooter() {
         </div>
         <div class="footer-col">
           <h4>Serviços</h4>
-          <a href="servicos.html">Banho e Tosa</a>
-          <a href="servicos.html">Consulta Veterinária</a>
-          <a href="servicos.html">Hotel para Pets</a>
-          <a href="servicos.html">Vacinação</a>
+          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Banho e Tosa</a>
+          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Consulta Veterinária</a>
+          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Hotel para Pets</a>
+          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Vacinação</a>
         </div>
         <div class="footer-col">
           <h4>Links</h4>
-          <a href="index.html">Início</a>
-          <a href="produtos.html">Produtos</a>
-          <a href="agendamento.html">Agendamento</a>
-          <a href="sobre.html">Sobre Nós</a>
+          <a href="${_BASE}index.html">Início</a>
+          <a href="${_BASE}produtos/produtos.html">Produtos</a>
+          <a href="${_BASE}agendamento.html">Agendamento</a>
+          <a href="${_BASE}index.html#sobre">Sobre Nós</a>
         </div>
         <div class="footer-col">
           <h4>Contato</h4>
-          <a href="contato.html">Fale Conosco</a>
+          <a href="${_BASE}index.html#contato">Fale Conosco</a>
           <a href="mailto:contato@petcare.com.br">contato@petcare.com.br</a>
           <a href="tel:+551199999999">(11) 9 9999-9999</a>
         </div>

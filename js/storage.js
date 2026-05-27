@@ -76,3 +76,68 @@ const Storage = (() => {
   return { get, set, remove, clear, getList, addToList, updateInList, removeFromList, findInList };
 
 })();
+const PRODUTOS_PADRAO = [
+  {
+    id: 1,
+    nome: "Ração Premium para Cães",
+    descricao: "Alimentação completa e balanceada para cães de todas as idades.",
+    preco: 89.90,
+    cat: "alimentacao",
+    img: "images/produto1.png"
+  },
+  {
+    id: 2,
+    nome: "Brinquedo Plastico Osso",
+    descricao: "Brinquedo macio com apito interno para diversão.",
+    preco: 34.90,
+    cat: "brinquedos",
+    img: "images/produto2.png"
+  },
+  {
+    id: 3,
+    nome: "Mordedor para Cães",
+    descricao: "Brinquedo resistente para cães que gostam de morder.",
+    preco: 45.90,
+    cat: "brinquedos",
+    img: "images/produto3.png"
+  },
+  {
+    id: 4,
+    nome: "Shampoo Curology",
+    descricao: "Elimina pulgas e carrapatos, fórmula suave.",
+    preco: 29.90,
+    cat: "higiene",
+    img: "images/produto4.png"
+  },
+  {
+    id: 5,
+    nome: "Oculus para Cães",
+    descricao: "Para deiar seu cachorro estiloso e protegido do sol.",
+    preco: 19.90,
+    cat: "acessorios",
+    img: "images/produto5.png"
+  },
+    {
+    id: 6,
+    nome: "Arranhados para gatos",
+    descricao: "Para deiar seu gato feliz e protegido.",
+    preco: 39.90,
+    cat: "brinquedos",
+    img: "images/produto6.png"
+  }
+];
+
+function initProdutosPadrao() {
+  const KEY_PRODUTOS = 'petcare_produtos';
+  const produtosExistentes = Storage.getList(KEY_PRODUTOS);
+
+  if (produtosExistentes.length === 0) {
+    PRODUTOS_PADRAO.forEach(produto => {
+      Storage.addToList(KEY_PRODUTOS, produto);
+    });
+    console.log("✅ Produtos padrão carregados!");
+  }
+}
+
+// Inicializa automaticamente
+initProdutosPadrao();

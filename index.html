@@ -6,6 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PetCare — Cuidamos do seu melhor amigo</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos adicionais para garantir o funcionamento */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .card.product p {
+      font-size: 13px;
+      color: #666;
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -86,49 +108,17 @@
         <h2>Produtos em Destaque</h2>
         <p class="subtitle">Selecionados com critério para o bem-estar do seu pet.</p>
       </div>
-      <div class="grid products-grid">
-        <div class="card product">
-          <img src="images/produto1.png" alt="Ração Premium" class="card-img">
-          <div class="card-body">
-            <span class="badge">Alimentação</span>
-            <h3>Ração Premium Adulto</h3>
-            <div class="price">R$ 89,90</div>
-            <button class="btn primary" style="width:100%;"
-              onclick="addCart({id:1,nome:'Ração Premium Adulto',preco:89.90,img:'images/produto1.png'})">🛒
-              Comprar</button>
-          </div>
-        </div>
-        <div class="card product">
-          <img src="images/produto2.png" alt="Bola LED" class="card-img">
-          <div class="card-body">
-            <span class="badge">Brinquedos</span>
-            <h3>Bola Interativa LED</h3>
-            <div class="price">R$ 34,90</div>
-            <button class="btn primary" style="width:100%;"
-              onclick="addCart({id:2,nome:'Bola Interativa LED',preco:34.90,img:'images/produto2.png'})">🛒
-              Comprar</button>
-          </div>
-        </div>
-        <div class="card product">
-          <img src="images/produto3.png" alt="Coleira" class="card-img">
-          <div class="card-body">
-            <span class="badge">Acessórios</span>
-            <h3>Coleira Ajustável Premium</h3>
-            <div class="price">R$ 45,90</div>
-            <button class="btn primary" style="width:100%;"
-              onclick="addCart({id:3,nome:'Coleira Ajustável Premium',preco:45.90,img:'images/produto3.png'})">🛒
-              Comprar</button>
-          </div>
-        </div>
+      <div class="grid products-grid" id="produtos-destaque">
+        <!-- Os produtos serão carregados dinamicamente aqui -->
       </div>
       <div class="text-center mt-32">
-        <button class="btn outline" onclick="location.href='produtos.html'">Ver todos os produtos →</button>
+        <button class="btn outline" onclick="location.href='produtos/produtos.html'">Ver todos os produtos →</button>
       </div>
     </div>
   </section>
 
   <!-- SOBRE -->
-  <section class="about">
+  <section class="about" id="sobre">
     <div class="container about-content">
       <div class="about-text">
         <h2>Sobre o PetCare</h2>
@@ -180,7 +170,7 @@
   </section>
 
   <!-- CONTATO -->
-  <section class="contact">
+  <section class="contact" id="contato">
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info">
@@ -204,28 +194,146 @@
   <script src="js/storage.js"></script>
   <script src="js/main.js"></script>
   <script>
-    function addCart(produto) {
+    // ========== FUNÇÃO PARA CARREGAR PRODUTOS EM DESTAQUE ==========
+    function carregarProdutosDestaque() {
+      const container = document.getElementById('produtos-destaque');
+      if (!container) return;
+      
+      // Buscar produtos do localStorage
+      const todosProdutos = Storage.getList('petcare_produtos');
+      
+      // Pega apenas os 3 primeiros produtos
+      const produtosDestaque = todosProdutos.slice(0, 3);
+      
+      // Se não tem produtos, mostra mensagem
+      if (produtosDestaque.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
+            <p>⚠️ Nenhum produto encontrado no momento.</p>
+            <button class="btn primary" onclick="location.href='produtos/produtos.html'">Ver produtos</button>
+          </div>
+        `;
+        return;
+      }
+      
+      // Mapeamento de categorias para badges
+      const categoriasMap = {
+        'alimentacao': '🥣 Alimentação',
+        'brinquedos': '🎾 Brinquedos',
+        'acessorios': '🎀 Acessórios',
+        'higiene': '🛁 Higiene',
+        'saude': '💊 Saúde'
+      };
+      
+      // Renderizar os produtos
+      container.innerHTML = produtosDestaque.map(produto => {
+        // Formatar preço
+        const precoFormatado = Number(produto.preco).toFixed(2).replace('.', ',');
+        
+        // Definir imagem (com fallback)
+        const imagemSrc = produto.img || 'images/produto1.png';
+        
+        // Definir badge da categoria
+        const badgeTexto = categoriasMap[produto.cat] || produto.cat || 'Produto';
+        
+        // Descrição resumida
+        const descricaoResumida = produto.descricao ? 
+          `<p style="font-size: 13px; color: #666; margin: 8px 0;">${produto.descricao.substring(0, 50)}${produto.descricao.length > 50 ? '...' : ''}</p>` : '';
+        
+        return `
+          <div class="card product">
+            <img src="${imagemSrc}" alt="${produto.nome}" class="card-img"
+                 onerror="this.src='images/produto1.png'">
+            <div class="card-body">
+              <span class="badge">${badgeTexto}</span>
+              <h3>${produto.nome}</h3>
+              ${descricaoResumida}
+              <div class="price">R$ ${precoFormatado}</div>
+              <button class="btn primary" style="width:100%;" onclick="addCart(${produto.id})">
+                🛒 Comprar
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    // ========== FUNÇÃO PARA ADICIONAR AO CARRINHO ==========
+    function addCart(id) {
+      // Buscar o produto completo do localStorage
+      const todosProdutos = Storage.getList('petcare_produtos');
+      const produto = todosProdutos.find(p => p.id === id);
+      
+      if (!produto) {
+        if (typeof mostrarToast === 'function') {
+          mostrarToast('Produto não encontrado!', 'error');
+        } else {
+          alert('Produto não encontrado!');
+        }
+        return;
+      }
+      
       const carrinho = Storage.getList('petcare_carrinho');
       const exist = carrinho.find(i => i.id === produto.id);
+      
       if (exist) {
         Storage.updateInList('petcare_carrinho', exist.id, { qtd: (exist.qtd || 1) + 1 });
       } else {
-        Storage.addToList('petcare_carrinho', { ...produto, qtd: 1 });
+        Storage.addToList('petcare_carrinho', { 
+          id: produto.id,
+          nome: produto.nome,
+          preco: produto.preco,
+          img: produto.img,
+          qtd: 1 
+        });
       }
-      updateCartBadge();
-      mostrarToast('Produto adicionado ao carrinho! 🛒', 'success');
+      
+      // Atualizar badge do carrinho se a função existir
+      if (typeof updateCartBadge === 'function') {
+        updateCartBadge();
+      }
+      
+      // Mostrar mensagem de sucesso
+      if (typeof mostrarToast === 'function') {
+        mostrarToast(`✅ ${produto.nome} adicionado ao carrinho!`, 'success');
+      } else {
+        alert(`✅ ${produto.nome} adicionado ao carrinho!`);
+      }
     }
-
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      Storage.addToList('petcare_contatos', {
-        nome: document.getElementById('contact-name').value,
-        email: document.getElementById('contact-email').value,
-        mensagem: document.getElementById('contact-msg').value,
-        data: new Date().toLocaleString('pt-BR')
+    
+    // ========== FORMULÁRIO DE CONTATO ==========
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nome = document.getElementById('contact-name')?.value || '';
+        const email = document.getElementById('contact-email')?.value || '';
+        const mensagem = document.getElementById('contact-msg')?.value || '';
+        
+        if (nome && email && mensagem) {
+          Storage.addToList('petcare_contatos', {
+            nome: nome,
+            email: email,
+            mensagem: mensagem,
+            data: new Date().toLocaleString('pt-BR')
+          });
+          
+          if (typeof mostrarToast === 'function') {
+            mostrarToast('Mensagem enviada com sucesso!', 'success');
+          } else {
+            alert('Mensagem enviada com sucesso!');
+          }
+          
+          contactForm.reset();
+        }
       });
-      mostrarToast('Mensagem enviada com sucesso!', 'success');
-      this.reset();
+    }
+    
+    // ========== INICIALIZAR ==========
+    // Carregar produtos quando a página terminar de carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      carregarProdutosDestaque();
     });
   </script>
 </body>
