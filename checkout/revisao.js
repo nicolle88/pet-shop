@@ -63,4 +63,5 @@ function confirmarPedido() {
     localStorage.setItem('petcare_numero_pedido', numero);
 
     window.location.href = 'confirmacao.html';
+    localStorage.removeItem('petcare_carrinho');
 }
