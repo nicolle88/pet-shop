@@ -10,10 +10,26 @@ function carregarUsuarios() {
   let dados = localStorage.getItem('usuarios');
   if (dados) {
     usuarios = JSON.parse(dados);
+    // Migração: garante que admin sempre tenha isAdmin: true
+    let atualizado = false;
+    usuarios.forEach(u => {
+      if (u.email === 'admin@petcare.com.br' && !u.isAdmin) {
+        u.isAdmin = true;
+        atualizado = true;
+      }
+    });
+    if (atualizado) salvarUsuarios();
+
+    // Atualiza sessão ativa se for o admin sem o campo
+    const logado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+    if (logado && logado.email === 'admin@petcare.com.br' && !logado.isAdmin) {
+      logado.isAdmin = true;
+      localStorage.setItem('usuarioLogado', JSON.stringify(logado));
+    }
   } else {
     // Usuário admin padrão
     usuarios = [
-      { nome: "Admin", email: "admin@petcare.com.br", senha: "admin123" }
+      { nome: "Admin", email: "admin@petcare.com.br", senha: "admin123", isAdmin: true }
     ];
     salvarUsuarios();
   }
@@ -59,7 +75,7 @@ function fazerCadastro() {
   }
 
   // Adicionar novo usuário
-  usuarios.push({ nome: nome, email: email, senha: senha });
+  usuarios.push({ nome: nome, email: email, senha: senha, isAdmin: false });
   salvarUsuarios();
 
   msg.innerHTML = 'Cadastro realizado! Faça login.';

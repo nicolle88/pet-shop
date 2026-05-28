@@ -17,6 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── HEADER ── */
 function injectHeader() {
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
+  const isAdmin = usuarioLogado && usuarioLogado.isAdmin;
+
+  const adminLink = isAdmin
+    ? `<a href="${_BASE}admin.html" class="admin-link">⚙️ Administrador</a>`
+    : '';
+
+  const userActions = usuarioLogado
+    ? `<span class="user-name">👤 ${usuarioLogado.nome}</span>
+       <button class="btn outline sm" onclick="logout()">Sair</button>`
+    : `<button class="btn outline sm" onclick="location.href='${_BASE}auth/login.html'">Entrar</button>`;
+
   const header = document.createElement('header');
   header.id = 'site-header';
   header.innerHTML = `
@@ -28,21 +40,27 @@ function injectHeader() {
       <nav class="main-nav">
         <a href="${_BASE}index.html">Início</a>
         <a href="${_BASE}produtos/produtos.html">Produtos</a>
-        <a href="#" "onclick="return false;">Serviços</a>
         <a href="${_BASE}index.html#sobre">Sobre</a>
         <a href="${_BASE}index.html#contato">Contato</a>
+        ${adminLink}
       </nav>
       <div class="header-actions">
         <div class="cart-icon" onclick="location.href='${_BASE}carrinho.html'" title="Carrinho">
           🛒
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </div>
-          <button class="btn outline sm" onclick="location.href='${_BASE}auth/login.html'">Entrar</button>
+        ${userActions}
         <button class="btn green sm" onclick="location.href='${_BASE}agendamento.html'">📅 Agendar</button>
       </div>
     </div>
   `;
   document.body.prepend(header);
+}
+
+function logout() {
+  localStorage.removeItem('usuarioLogado');
+  const base = (_parentDir === 'produtos') ? '../' : '';
+  location.href = base + 'index.html';
 }
 
 /* ── FOOTER ── */
