@@ -22,6 +22,19 @@
       line-height: 1.4;
     }
 
+ /* CENTRALIZAR 3 CARDS DE SERVIÇOS */
+.services .services-grid {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.services .services-grid .service-card {
+  flex: 0 0 300px;
+  max-width: 300px;
+}
+
     @media (max-width: 768px) {
       .products-grid {
         grid-template-columns: 1fr;
@@ -32,74 +45,63 @@
 
 <body>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          Profissionais certificados
-        </div>
-        <h1>Cuidamos do seu melhor amigo com <span>carinho</span></h1>
-        <p>Serviços completos para pets com profissionais qualificados e ambiente acolhedor.</p>
-        <div class="hero-buttons">
-          <button class="btn primary" onclick="location.href='agendamento.html'">📅 Agendar agora</button>
-          <button class="btn outline" onclick="location.href='servicos.html'">Ver serviços →</button>
-        </div>
-        <div class="hero-proof">
-          <div class="proof-avatars">
-            <div class="proof-avatar">AM</div>
-            <div class="proof-avatar" style="background:#BBF7D0;color:#166534;">LC</div>
-            <div class="proof-avatar" style="background:#BFDBFE;color:#1D4ED8;">RF</div>
-            <div class="proof-avatar">+</div>
-          </div>
-          <div class="proof-text">
-            <div class="proof-stars">★★★★★</div>
-            <strong>+500 clientes</strong> satisfeitos · nota 4.9/5
-          </div>
-        </div>
+<!-- HERO -->
+<section class="hero" style="background: linear-gradient(to right, #3B82F6, #4ADE80); padding: 40px 0;">
+  <div class="container hero-content">
+    <div class="hero-text">
+      <h1 style="color: white;">Cuidamos do seu melhor amigo com <span style="color: #4ADE80; text-decoration: underline; text-underline-offset: 6px;">carinho</span></h1>
+      <p style="color: rgba(255,255,255,0.85);">Serviços completos para pets com profissionais qualificados e ambiente acolhedor.</p>
+      <div class="hero-buttons">
+        <button class="btn" style="background: white; color: #3B82F6; border-radius: 9999px; padding: 12px 24px; font-weight: 600; border: none; cursor: pointer;" onclick="location.href='agendamento.html'">📅 Agendar agora</button>
       </div>
-      <div class="hero-image">
-        <img src="images/hero.png" alt="Cachorros felizes">
+      <div class="hero-proof">
+        <div class="proof-avatars">
+          <div class="proof-avatar">AM</div>
+          <div class="proof-avatar" style="background:#BBF7D0;color:#166534;">LC</div>
+          <div class="proof-avatar" style="background:#BFDBFE;color:#1D4ED8;">RF</div>
+          <div class="proof-avatar">+</div>
+        </div>
+        <div class="proof-text" style="color: white;">
+          <div class="proof-stars" style="color: white;">★★★★★</div>
+          <strong>+500 clientes</strong> satisfeitos · nota 4.9/5
+        </div>
       </div>
     </div>
-  </section>
+    <div class="hero-image">
+      <img src="images/hero.png" alt="Cachorros felizes">
+    </div>
+  </div>
+</section>
 
-  <!-- SERVIÇOS -->
-  <section class="services">
-    <div class="container">
-      <div class="section-header">
-        <h2>Nossos Serviços</h2>
-        <p class="subtitle">Tudo que seu pet precisa, com o carinho que ele merece.</p>
+<!-- SERVIÇOS -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <h2>Nossos Serviços</h2>
+      <p class="subtitle">Tudo que seu pet precisa, com o carinho que ele merece.</p>
+    </div>
+    <div class="grid services-grid">
+      <div class="service-card">
+        <div class="service-icon" style="background:#EFF6FF;">✂️</div>
+        <h3>Banho e Tosa</h3>
+        <p>Higiene e estética com produtos de qualidade premium para seu pet.</p>
+        <a href="banho.html" class="service-link">Saiba mais →</a>
       </div>
-      <div class="grid services-grid">
-        <div class="service-card">
-          <div class="service-icon" style="background:#EFF6FF;">✂️</div>
-          <h3>Banho e Tosa</h3>
-          <p>Higiene e estética com produtos de qualidade premium para seu pet.</p>
-          <a href="servicos.html" class="service-link">Saiba mais →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-icon" style="background:#F0FDF4;">🩺</div>
-          <h3>Consulta Veterinária</h3>
-          <p>Atendimento com veterinários especializados para a saúde do seu animal.</p>
-          <a href="servicos.html" class="service-link">Saiba mais →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-icon" style="background:#EFF6FF;">🏠</div>
-          <h3>Hotel para Pets</h3>
-          <p>Hospedagem segura com recreação e cuidados 24 horas por dia.</p>
-          <a href="servicos.html" class="service-link">Saiba mais →</a>
-        </div>
-        <div class="service-card">
-          <div class="service-icon" style="background:#F0FDF4;">💉</div>
-          <h3>Vacinação</h3>
-          <p>Programa completo para manter seu pet protegido e saudável.</p>
-          <a href="servicos.html" class="service-link">Saiba mais →</a>
-        </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#F0FDF4;">🩺</div>
+        <h3>Consulta Veterinária</h3>
+        <p>Atendimento com veterinários especializados para a saúde do seu animal.</p>
+        <a href="veterinario.html" class="service-link">Saiba mais →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon" style="background:#EFF6FF;">🏠</div>
+        <h3>Hotel para Pets</h3>
+        <p>Hospedagem segura com recreação e cuidados 24 horas por dia.</p>
+        <a href="hotel.html" class="service-link">Saiba mais →</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- PRODUTOS EM DESTAQUE -->
   <section class="products">
@@ -126,7 +128,6 @@
           e humano.</p>
         <p>Contamos com uma equipe de profissionais certificados e apaixonados por pets, prontos para cuidar do seu
           melhor amigo como se fosse o nosso.</p>
-        <button class="btn primary mt-24" onclick="location.href='sobre.html'">Conheça nossa história</button>
       </div>
       <div class="about-image">
         <img src="images/sobre.png" alt="Pessoa com cachorro">

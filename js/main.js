@@ -76,10 +76,9 @@ function injectFooter() {
         </div>
         <div class="footer-col">
           <h4>Serviços</h4>
-          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Banho e Tosa</a>
-          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Consulta Veterinária</a>
-          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Hotel para Pets</a>
-          <a href="#" onclick="return false;" style="opacity:.45;cursor:default;">Vacinação</a>
+          <a href="${_BASE}banho.html">Banho e Tosa</a>
+          <a href="${_BASE}veterinario.html">Consulta Veterinária</a>
+          <a href="${_BASE}hotel.html">Hotel para Pets</a>
         </div>
         <div class="footer-col">
           <h4>Links</h4>
@@ -97,7 +96,7 @@ function injectFooter() {
       </div>
       <div class="footer-bottom">
         <span>© ${new Date().getFullYear()} PetCare. Todos os direitos reservados.</span>
-        <span>Feito com 🐾 para amantes de pets</span>
+        <span>Feito com amor para amantes de pets</span>
       </div>
     </div>
   `;
