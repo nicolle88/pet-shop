@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Admin — PetCare</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
   <style>
     main { background: var(--bg-page); padding: 48px 0; min-height: 60vh; }
 
@@ -129,7 +129,7 @@
 
 <section class="page-hero">
   <div class="container">
-    <p class="breadcrumb"><a href="index.html">Início</a> / Admin</p>
+    <p class="breadcrumb"><a href="../index.html">Início</a> / Admin</p>
     <h1>⚙️ Painel Administrativo</h1>
     <p>Gerencie produtos, usuários, pedidos e agendamentos.</p>
   </div>
@@ -141,7 +141,7 @@
     <!-- BLOCOS -->
     <div class="dashboard-grid">
 
-      <a href="produtos/admin.prod.html" class="dash-card">
+      <a href="../produtos/admin.prod.html" class="dash-card">
         <div class="dash-icon blue">📦</div>
         <div class="dash-count" id="count-produtos">–</div>
         <h3>Gerenciar Produtos</h3>
@@ -149,7 +149,7 @@
         <span class="dash-link">Abrir painel →</span>
       </a>
 
-      <div class="dash-card" onclick="scrollTo('sec-usuarios')">
+      <div class="dash-card" onclick=location.href='#sec-usuarios'>
         <div class="dash-icon purple">👥</div>
         <div class="dash-count" id="count-usuarios">–</div>
         <h3>Gerenciar Usuários</h3>
@@ -157,7 +157,7 @@
         <span class="dash-link">Ver lista →</span>
       </div>
 
-      <div class="dash-card" onclick="scrollTo('sec-pedidos')">
+      <div class="dash-card" onclick=location.href='#sec-pedidos'>
         <div class="dash-icon green">🛒</div>
         <div class="dash-count" id="count-pedidos">–</div>
         <h3>Gerenciar Pedidos</h3>
@@ -165,7 +165,7 @@
         <span class="dash-link">Ver lista →</span>
       </div>
 
-      <div class="dash-card" onclick="scrollTo('sec-agendamentos')">
+      <div class="dash-card" onclick=location.href='#sec-agendamentos'>
         <div class="dash-icon yellow">📅</div>
         <div class="dash-count" id="count-agendamentos">–</div>
         <h3>Gerenciar Agendamentos</h3>
@@ -235,19 +235,16 @@
   </div>
 </main>
 
-<script src="js/storage.js"></script>
-<script src="js/main.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/main.js"></script>
 <script>
   // Proteção: só admin acessa
   const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
   if (!usuarioLogado || !usuarioLogado.isAdmin) {
     alert('Acesso restrito. Faça login como administrador.');
-    window.location.href = 'auth/login.html';
+    window.location.href = '../auth/login.html';
   }
 
-  function scrollTo(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-  }
 
   function fmtMoeda(v) {
     return 'R$ ' + Number(v || 0).toFixed(2).replace('.', ',');

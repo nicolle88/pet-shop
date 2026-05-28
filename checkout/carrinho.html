@@ -6,10 +6,10 @@
     <title>Carrinho de Compras — PetCare</title>
 
     <!-- Estilos globais do projeto (paleta, botões, header, footer…) -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
     <!-- Estilos específicos desta página -->
-    <link rel="stylesheet" href="css/carrinho.css">
+    <link rel="stylesheet" href="../css/carrinho.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
     <section class="page-hero">
         <div class="container">
             <p class="breadcrumb">
-                <a href="index.html">Início</a> / Carrinho
+                <a href="../index.html">Início</a> / Carrinho
             </p>
             <h1>🛒 Carrinho de Compras</h1>
             <!-- Atualizado via JS com a quantidade de produtos -->
@@ -40,9 +40,9 @@
 
     <!-- ── SCRIPTS OBRIGATÓRIOS (sempre nesta ordem) ── -->
     <!-- storage.js expõe o objeto global Storage para CRUD no localStorage -->
-    <script src="js/storage.js"></script>
+    <script src="../js/storage.js"></script>
     <!-- main.js injeta header, footer, badge do carrinho e a função mostrarToast -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 
     <!-- ── JAVASCRIPT ESPECÍFICO DO CARRINHO ── -->
     <script>
@@ -86,7 +86,7 @@
                         <div class="icone-vazio">🛒</div>
                         <h2 class="vazio-titulo">Seu carrinho está vazio</h2>
                         <p class="vazio-texto">Adicione produtos para começar suas compras</p>
-                        <a href="produtos.html" class="btn btn-primary btn-primary-centered">Ver Produtos</a>
+                        <a href="../produtos/produtos.html" class="btn btn-primary btn-primary-centered">Ver Produtos</a>
                     </div>`;
                 return;
             }
@@ -145,7 +145,7 @@
                      </div>`;
 
             html += '<a href="checkout.html" class="btn btn-primary">Finalizar Compra</a>';
-            html += '<a href="produtos.html" class="btn btn-outline">Continuar Comprando</a>';
+            html += '<a href="../produtos/produtos.html" class="btn btn-outline">Continuar Comprando</a>';
 
             html += '</div></div></div>';   /* fecha resumo-card, coluna 2 e carrinho-grid */
 
@@ -159,6 +159,12 @@
            Recebe um objeto do carrinho e retorna o HTML do card.
            Estrutura esperada: { id, nome, preco, img, qtd }
            ============================================================ */
+        function resolveImg(src) {
+            if (!src) return '../images/produto1.png';
+            if (src.startsWith('http') || src.startsWith('../') || src.startsWith('/')) return src;
+            return '../' + src;
+        }
+
         function montarHtmlProduto(produto) {
             const subtotalProduto = produto.preco * produto.qtd;
 
@@ -167,7 +173,7 @@
                 <div class="card">
                     <div class="produto-item">
 
-                        <img src="${produto.img}" alt="${produto.nome}" class="produto-img">
+                        <img src="${resolveImg(produto.img)}" alt="${produto.nome}" class="produto-img">
 
                         <div class="produto-info">
                             <h3 class="produto-nome">${produto.nome}</h3>

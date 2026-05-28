@@ -5,7 +5,8 @@
 
 const _pathParts = window.location.pathname.replace(/\\/g, '/').split('/');
 const _parentDir = _pathParts[_pathParts.length - 2] || '';
-const _BASE = (_parentDir === 'produtos') ? '../' : '';
+const _SUBDIRS = ['produtos', 'auth', 'checkout', 'admin'];
+const _BASE = _SUBDIRS.includes(_parentDir) ? '../' : '';
 
 document.addEventListener('DOMContentLoaded', () => {
   injectHeader();
@@ -21,7 +22,7 @@ function injectHeader() {
   const isAdmin = usuarioLogado && usuarioLogado.isAdmin;
 
   const adminLink = isAdmin
-    ? `<a href="${_BASE}admin.html" class="admin-link">⚙️ Administrador</a>`
+    ? `<a href="${_BASE}admin/admin.html" class="admin-link">⚙️ Administrador</a>`
     : '';
 
   const userActions = usuarioLogado
@@ -45,7 +46,7 @@ function injectHeader() {
         ${adminLink}
       </nav>
       <div class="header-actions">
-        <div class="cart-icon" onclick="location.href='${_BASE}carrinho.html'" title="Carrinho">
+        <div class="cart-icon" onclick="location.href='${_BASE}checkout/carrinho.html'" title="Carrinho">
           🛒
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </div>
@@ -59,8 +60,7 @@ function injectHeader() {
 
 function logout() {
   localStorage.removeItem('usuarioLogado');
-  const base = (_parentDir === 'produtos') ? '../' : '';
-  location.href = base + 'index.html';
+  location.href = _BASE + 'index.html';
 }
 
 /* ── FOOTER ── */
