@@ -37,7 +37,7 @@ function injectHeader() {
           🛒
           <span class="cart-badge" id="cart-badge" style="display:none;">0</span>
         </div>
-        <button class="btn outline sm" onclick="location.href='${_BASE}login.html'">Entrar</button>
+          <button class="btn outline sm" onclick="location.href='${_BASE}auth/login.html'">Entrar</button>
         <button class="btn green sm" onclick="location.href='${_BASE}agendamento.html'">📅 Agendar</button>
       </div>
     </div>
