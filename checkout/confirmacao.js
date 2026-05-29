@@ -1,5 +1,3 @@
-// confirmacao.js
-
 document.addEventListener('DOMContentLoaded', function () {
 
     // Usa o número gerado em revisao.js, ou gera um fallback
