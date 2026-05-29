@@ -38,7 +38,30 @@ function buscarCEP(cep) {
         })
         .catch(() => {}); // silencia erros de rede
 }
+// Atualiza o resumo lateral ao carregar a página
+document.addEventListener('DOMContentLoaded', function () {
+    let subtotal = 0;
 
+    try {
+        const itensCarrinho = JSON.parse(localStorage.getItem('petcare_carrinho') || '[]'); // le os itens do carrinho do local storage
+        itensCarrinho.forEach(function (p) {
+            subtotal += (p.preco * p.qtd); // soma os preços multiplicados pela quantidade de cada produto
+        });
+    } catch (e) {
+        subtotal = 0;
+    }
+
+    const frete = subtotal >= 200 ? 0 : 15.90; // Frete gratis para compras acima de 200, caso contrario 15.90
+    const total = subtotal + frete;
+
+    const elSubtotal = document.getElementById('resumo-subtotal');
+    const elFrete    = document.getElementById('resumo-frete');
+    const elTotal    = document.getElementById('resumo-total');
+
+    if (elSubtotal) elSubtotal.textContent = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
+    if (elFrete)    elFrete.textContent    = frete === 0 ? 'GRÁTIS' : 'R$ ' + frete.toFixed(2).replace('.', ',');
+    if (elTotal)    elTotal.textContent    = 'R$ ' + total.toFixed(2).replace('.', ',');
+});
 // Salva e avança para pagamento
 document.getElementById('btn-ir-para-pagamento').addEventListener('click', function (e) {
     e.preventDefault();
