@@ -9,11 +9,11 @@ function avancarParaEntrega() {
         return;
     }
 
-    // Salva direto no localStorage, sem depender do Storage do grupo
+    // Salva direto no localStorage, sem depender do Storage do grupo 
     const dadosUsuario = { nome, email, cpf, telefone };
     localStorage.setItem('petcare_usuario', JSON.stringify(dadosUsuario));
 
-    window.location.href = 'entrega.html';
+    window.location.href = 'entrega.html'; // e redireciona para a pagina de entrega
 }
 
 // Atualiza o resumo lateral ao carregar a página
