@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let subtotal = 0;
 
     try {
-        const itensCarrinho = JSON.parse(localStorage.getItem('petcare_carrinho') || '[]');
+        const itensCarrinho = JSON.parse(localStorage.getItem('petcare_carrinho') || '[]'); // le os itens do carrinho do local storage
         itensCarrinho.forEach(function (p) {
-            subtotal += (p.preco * p.qtd);
+            subtotal += (p.preco * p.qtd); // soma os preços multiplicados pela quantidade de cada produto
         });
     } catch (e) {
         subtotal = 0;
