@@ -1,6 +1,5 @@
-// pagamento.js
 
-// ── 1. Troca de aba (Cartão, Boleto, PIX) ──
+//Troca de aba (Cartão, Boleto, PIX) ──
 function trocarAba(painelId, abaBotao) {
     // Remove "ativa" de todas as abas e painéis
     document.querySelectorAll('.aba').forEach(function(a) {
@@ -16,7 +15,7 @@ function trocarAba(painelId, abaBotao) {
 }
 
 
-// ── 2. PIX: troca o tipo de chave ──
+// PIX: troca o tipo de chave
 let pixAtual = 'cpf'; // guarda qual tipo de chave está selecionado
 
 function trocarPix(tipo, botao) {
@@ -71,7 +70,7 @@ function mascaraPix(input) {
 }
 
 
-// ── 3. Formatação do número do cartão ──
+// Formatação do número do cartão
 function formatarCartao(input) {
     // Remove tudo que não é número
     var v = input.value.replace(/\D/g, '');
@@ -93,7 +92,7 @@ function formatarValidade(input) {
 }
 
 
-// ── 4. Copiar código do boleto ──
+//Copiar código do boleto ──
 function copiarCodigo() {
     var codigo = document.getElementById('codigo-boleto').textContent.trim();
     navigator.clipboard.writeText(codigo);
@@ -107,7 +106,7 @@ function copiarCodigo() {
 }
 
 
-// ── 5. Salvar e avançar para a revisão ──
+// Salvar e avançar para a revisão ──
 function salvarEAvancar() {
     // Descobre qual aba está ativa pelo texto do botão
     var abaAtiva = document.querySelector('.aba.ativa');
