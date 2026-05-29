@@ -83,7 +83,7 @@
 <script src="js/main.js"></script>
 <script>
   const KEY = 'petcare_agendamentos';
-
+// Carrega e exibe os agendamentos
   function renderList() {
     const list = Storage.getList(KEY);
     const el = document.getElementById('agendamentos-list');
@@ -91,6 +91,7 @@
       el.innerHTML = '<p style="color:var(--text-light);">Nenhum agendamento ainda.</p>';
       return;
     }
+   // Gera dinamicamente os cards de agendamento 
     el.innerHTML = list.map(a => `
       <div class="agendamento-item">
         <div class="agendamento-info">
@@ -110,7 +111,7 @@
       renderList();
     }
   }
-
+//Cria um objeto contendo os dados informados pelo usuario
   document.getElementById('scheduling-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const item = {
