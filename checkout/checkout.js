@@ -1,5 +1,3 @@
-// checkout.js
-
 function avancarParaEntrega() {
     const nome     = document.getElementById('nome').value.trim();
     const email    = document.getElementById('email').value.trim();
@@ -22,7 +20,6 @@ function avancarParaEntrega() {
 document.addEventListener('DOMContentLoaded', function () {
     let subtotal = 0;
 
-    // Tenta ler o carrinho do grupo, mas não trava se não existir
     try {
         const itensCarrinho = JSON.parse(localStorage.getItem('petcare_carrinho') || '[]');
         itensCarrinho.forEach(function (p) {
@@ -32,12 +29,14 @@ document.addEventListener('DOMContentLoaded', function () {
         subtotal = 0;
     }
 
-    const frete = 19.90;
-    const total = subtotal > 0 ? subtotal + frete : 19.90;
+    const frete = subtotal >= 200 ? 0 : 15.90; // Frete gratis para compras acima de 200, caso contrario 15.90
+    const total = subtotal + frete;
 
     const elSubtotal = document.getElementById('resumo-subtotal');
+    const elFrete    = document.getElementById('resumo-frete');
     const elTotal    = document.getElementById('resumo-total');
 
     if (elSubtotal) elSubtotal.textContent = 'R$ ' + subtotal.toFixed(2).replace('.', ',');
+    if (elFrete)    elFrete.textContent    = frete === 0 ? 'GRÁTIS' : 'R$ ' + frete.toFixed(2).replace('.', ',');
     if (elTotal)    elTotal.textContent    = 'R$ ' + total.toFixed(2).replace('.', ',');
 });
